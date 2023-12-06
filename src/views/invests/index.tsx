@@ -8,7 +8,8 @@ import { ethers } from 'ethers';
 import { packages } from '@/constants';
 import InvestsCard from './components/InvestsCard';
 import CrowdSaleContract from '@/contracts/CrowdSaleContract';
-import UsdtContract from '@/contracts/USDTContract';
+import UsdtContract from '@/contracts/UsdtContract';
+
 
  export default function InvestView(){
   const [wallet, setWallet] = React.useState<IWalletInfo>();
@@ -76,19 +77,19 @@ import UsdtContract from '@/contracts/USDTContract';
 
   return(
     <Flex
-    w={{base: "full", lg: "90%"}}
+    w={{base: "full", lg: "100%"}}
     flexDirection="column"
-    margin="50px auto"
+    margin="10px auto"
     
     >
-      <Flex>
+      {/* <Flex>
         <Heading size="lg" fontWeight="bold">
           Blockchain trainee
         </Heading>
         <Spacer/>
         {!wallet && <ConnectWallet onClick={onConnectMetamark}/>}
         {wallet && <WalletInfo address={wallet?.address} amount={wallet?.bnb || 0} />}
-      </Flex>
+      </Flex> */}
       <SimpleGrid column={{base: 1, lg: 3}} mt="50px" spacing="20px" display="flex" flexWrap="wrap">
         {packages.map((pk, index) => (
           <InvestsCard 

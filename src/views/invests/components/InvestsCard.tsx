@@ -24,7 +24,7 @@ export default function InvestsCard ({pak, isBuying, rate, walletInfo, onBuy} : 
     alignItems="center"
     display="flex"
     flexDirection="column"
-    marginBottom="50px"
+    marginBottom="20px"
   >
     <Box
       bgImage={`/${pak.bg}`}

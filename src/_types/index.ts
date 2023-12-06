@@ -21,3 +21,37 @@ export interface IPackage {
   bg: string;
   token: TOKEN;
 }
+
+export interface Imenu {
+  name: string;
+  url: string;
+}
+
+export interface IAttribute {
+  trait_type: string;
+  value: string | number;
+}
+
+export interface INftItem {
+  id: number;
+  name?: string;
+  description?: string;
+  image: string;
+  attributes?: IAttribute[];
+  //Listing
+  price?: number;
+  author?: string;
+}
+
+export enum Clarity {
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "S",
+  "SS",
+  "SSS",
+}
+
+export type ActionType = "LIST" | "UNLIST" | "TRANSFER" | "AUCTION";

@@ -1,4 +1,5 @@
-import { IPackage, TOKEN } from "@/_types";
+import { IPackage, Imenu, TOKEN } from "@/_types";
+import exp from "constants";
 
 export const packages: IPackage[] = [
   {
@@ -49,4 +50,9 @@ export const packages: IPackage[] = [
     icon: "usdt.png",
     token: TOKEN.USDT,
   },
+];
+
+export const menus: Imenu[] = [
+  { name: "Invest", url: "/" },
+  { name: "Market", url: "/market" },
 ];

@@ -17,9 +17,10 @@ export default function getChainIdFromEnv(): number {
 }
 
 export const getRPC = () => {
-  if (getChainIdFromEnv() === CHAIN_ID.MAINNET) {
-    return process.env.NEXT_PUBLIC_RPC_MAINNET;
-  }
+  // if (getChainIdFromEnv() === CHAIN_ID.MAINNET) {
+  //   return process.env.NEXT_PUBLIC_RPC_MAINNET;
+  // }
+  console.log({ testnet: process.env.NEXT_PUBLIC_RPC_TESTNET });
   return process.env.NEXT_PUBLIC_RPC_TESTNET;
 };
 
@@ -29,4 +30,6 @@ export const SMART_ADDRESS = {
     56: "",
   },
   USDT: { 11155111: "0x325118259Db6a11Eef14Ee324663fe624fCC6aCa", 56: "" },
+  NFT: { 11155111: "0x716aeE5EE46A7C0B3691DD8c9B099237a3629c7A", 56: "" },
+  MARKET: { 11155111: "0x008FBB9Ee741bdBCb912bBc33EF6AA6f9ED24A44", 56: "" },
 };
