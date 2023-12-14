@@ -17,14 +17,14 @@ import React from "react";
 import DatePicker from "react-datepicker";
 
 interface IProps extends Omit<ModalProps, "children"> {
-  // type: "LISTING" | "AUCTION";
+   type: "LISTING" | "AUCTION";
   nft?: INftItem;
   isListing?: boolean;
-  onList?: (amount: number) => void;
+  onList?: (amount: number, expireDate?: Date | null) => void;
 }
 
 export default function ListModal({
-  // type,
+  type,
   nft,
   isListing,
   onList,
@@ -77,11 +77,11 @@ export default function ListModal({
                   right="40px"
                   color="rgba(255,255,255, 0.4)"
                 >
-                  IPT
+                  Floppy
                 </Text>
               </Flex>
 
-              {/* {type === "AUCTION" && (
+              {type === "AUCTION" && (
                 <>
                   <Text fontWeight="bold" mb="10px">
                     Expiration date:
@@ -105,13 +105,13 @@ export default function ListModal({
                     />
                   </Flex>
                 </>
-              )} */}
+              )}
               <Button
                 variant="primary"
-                onClick={() => onList && onList(amount)}
+                onClick={() => onList && onList(amount, startDate)}
                 disabled={!amount || isListing}
               >
-                {isListing ? <Spinner /> :  'List Now' }
+                {isListing ? <Spinner /> :  (type === "AUCTION" ? "Auction now" : "List now")  }
               </Button>
             </Flex>
           </Flex>

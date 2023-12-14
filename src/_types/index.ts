@@ -55,3 +55,17 @@ export enum Clarity {
 }
 
 export type ActionType = "LIST" | "UNLIST" | "TRANSFER" | "AUCTION";
+
+export interface IAuctionInfo extends INftItem {
+  auctionId: number;
+  auctioneer: string;
+  tokenId: number;
+  initialPrice: number;
+  previousBidder: string;
+  lastBid: number;
+  lastBidder: string;
+  startTime: number;
+  endTime: number;
+  completed: boolean;
+  active: boolean;
+}

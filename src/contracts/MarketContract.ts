@@ -42,7 +42,7 @@ export default class MarketContract extends Erc721 {
   };
 
   unListNft = async (tokenId: number) => {
-    const tx = await this._contract.unListNft(tokenId, this._option);
+    const tx = await this._contract.unListnft(tokenId, this._option);
     return this._handleTransactionResponse(tx);
   };
 

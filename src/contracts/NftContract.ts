@@ -3,7 +3,7 @@ import Erc721 from "./interfaces/Erc721Interface";
 import { getNFTAddress } from "./untils/getAddress";
 import { getRPC } from "./untils/common";
 import { getNFTAbi } from "./untils/getAbis";
-import { INftItem } from "@/_types";
+import { IAuctionInfo, INftItem } from "@/_types";
 
 export default class NftContract extends Erc721 {
   constructor(provider?: ethers.providers.Web3Provider) {
@@ -49,6 +49,21 @@ export default class NftContract extends Erc721 {
           id: o.tokenId,
           author: o.author,
           price: o.price,
+        };
+        return item;
+      })
+    );
+  };
+
+  getNftAuctionInfo = async (nftsAuctions: IAuctionInfo[]) => {
+    return Promise.all(
+      nftsAuctions.map(async (o: IAuctionInfo) => {
+        const tokenUrl = await this._contract.tokenURI(o.tokenId);
+        const obj = await (await fetch(`${tokenUrl}.json`)).json();
+        const item: IAuctionInfo = {
+          ...o,
+          ...obj,
+          id: o.tokenId,
         };
         return item;
       })
