@@ -5,7 +5,7 @@ import { SimpleGrid, Toast, useDisclosure, useToast } from '@chakra-ui/react';
 import React from 'react'
 import NftP2P from './components/NftP2P';
 import { useAppSelector } from '@/reduxs/hooks';
-import FloppyContract from '@/contracts/FloppyContract';
+import CardContract from '@/contracts/TokenContract';
 import { SuccessModal } from '@/components';
 import { getToast } from '@/untils';
 
@@ -40,8 +40,8 @@ export const P2PView = () => {
     try{
       setCurrentNft(nft);
       const marketContract = new MarketContract(web3Provider);
-      const floppyContract = new FloppyContract(web3Provider);
-      await floppyContract.approve(marketContract._contractAddress, nft.price);
+      const CardContract = new CardContract(web3Provider);
+      await CardContract.approve(marketContract._contractAddress, nft.price);
       const tx = await marketContract.buyNft(nft.id, nft.price);
       setTxHash(tx);
       onOpen();
