@@ -46,6 +46,24 @@ export const P2PView = () => {
       setTxHash(tx);
       onOpen();
 
+      const transaction = {
+        fromAddress: marketContract._contractAddress,
+        toAddress: wallet?.address,
+        txHash: tx,
+        action: "Buy NFT"
+      }
+
+      fetch("http://localhost:3500/transactions/", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify(transaction)
+      })
+      .then(res => res.json())
+      .then(response => console.log('Success:', JSON.stringify(response)))
+      .catch(error => console.error('Error:', error))
+
     }catch(er: any){
       console.log(er);
       

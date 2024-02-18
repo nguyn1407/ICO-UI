@@ -5,11 +5,10 @@ import {Flex, Heading, SimpleGrid, Spacer, useDisclosure} from '@chakra-ui/react
 import { IPackage, IWalletInfo, TOKEN, IRate} from '@/_types';
 import { WalletInfo, ConnectWallet, SuccessModal } from '../../components'
 import { ethers } from 'ethers';
-import { packages } from '@/constants';
+//import { packages } from '@/constants';
 import InvestsCard from './components/InvestsCard';
 import CrowdSaleContract from '@/contracts/CrowdSaleContract';
 import UsdtContract from '@/contracts/UsdtContract';
-
 
  export default function InvestView(){
   const [wallet, setWallet] = React.useState<IWalletInfo>();
@@ -20,6 +19,7 @@ import UsdtContract from '@/contracts/UsdtContract';
   const [pak, setPak] = React.useState<IPackage>();
   const [txHash, setTxHash] = React.useState<string>();
   const {isOpen, onClose, onOpen} = useDisclosure();
+  const [packages, setPackages] = React.useState<IPackage[]>([]);
 
   const getRate = React.useCallback(async ()=> {
     const crowdContract = new CrowdSaleContract();
@@ -32,6 +32,14 @@ import UsdtContract from '@/contracts/UsdtContract';
   React.useEffect(() => {
     getRate();
   }, [getRate]);
+
+  React.useEffect(()=>{
+    fetch('http://localhost:3500/items/')
+        .then(response => response.json())
+        .then(data => setPackages(data))
+        .catch(error => console.error(error));
+  }, []);
+
 
 
   const onConnectMetamark = async() => {
@@ -65,6 +73,25 @@ import UsdtContract from '@/contracts/UsdtContract';
     }
     setTxHash(hash);
     onOpen();
+
+    const transaction = {
+      fromAddress: crowdContract._contractAddress,
+      toAddress: wallet?.address,
+      txHash: hash,
+      action: "BuyICO token"
+    }
+
+    fetch("http://localhost:3500/transactions/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(transaction)
+    })
+    .then(res => res.json())
+    .then(response => console.log('Success:', JSON.stringify(response)))
+    .catch(error => console.error('Error:', error))
+
     try{
 
     }catch(er:any){

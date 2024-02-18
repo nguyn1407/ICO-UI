@@ -154,6 +154,24 @@ export default function MarketView(){
         setOpenTransferModal(false);
         onOpenSuccess();
         await getListNft();
+
+        const transaction = {
+          fromAddress: wallet.address,
+          toAddress: toAddress,
+          txHash: tx,
+          action: "Transfer token"
+        }
+  
+        fetch("http://localhost:3500/transactions/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(transaction)
+        })
+        .then(res => res.json())
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error))
     }
     catch(ex){}
 
